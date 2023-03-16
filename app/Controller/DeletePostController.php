@@ -7,6 +7,6 @@ class DeletePostController
     //
     public function deletePostAction() {
         
-        return view('editPost');
+        return view('deletePost');
     }
 }
