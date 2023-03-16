@@ -1,6 +1,8 @@
 <?php
 
+use App\Controller\EditPostController;
 use App\Controller\IndexController;
+use App\Controller\DeletePostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,3 +17,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::match(['GET', 'POST'],'/', [IndexController::class, 'indexAction'])->name('index');
+Route::get('editPost', [EditPostController::class, 'editPostAction'])->name('editPost');
+Route::get('deletePost', [DeletePostController::class, 'deletePostAction'])->name('deletePost');
