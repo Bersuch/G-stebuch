@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Hallo aus dem Delete Post Blade</h1>
+    <h1>{{ $id }}</h1>
 </div>
 
 @endsection

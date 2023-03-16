@@ -5,8 +5,8 @@ namespace App\Controller;
 class DeletePostController
 {
     //
-    public function deletePostAction() {
+    public function deletePostAction($id) {
         
-        return view('deletePost');
+        return view('deletePost', ['id' => $id]);
     }
 }
