@@ -5,3 +5,7 @@ https://www.youtube.com/watch?v=ZGVhSAW2NYw
 
 -- It is solely for personal use. --
 
+
+This is the base construct. The design hurts but will be further developed. Stay tuned!
+
+![Screenshot 2023-03-17 002232](https://user-images.githubusercontent.com/29208193/225773892-3de7dda3-1b1d-436f-b0cd-2ba74ccdf692.png)
