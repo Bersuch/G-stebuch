@@ -21,7 +21,7 @@ Route::post('/', [IndexController::class, 'saveAction'])->name('saveEntry');
 
 // Edit
 Route::get('/editPost/{id}', [EditPostController::class, 'editPostAction'])->name('editPost');
-Route::post('/savePost/{id}', [EditPostController::class, 'savePostAction'])->name('savePost');
+Route::post('/savePost/{$id}', [EditPostController::class, 'savePostAction'])->name('savePost');
 
 // Delete
 Route::get('deletePost/{id}', [DeletePostController::class, 'deletePostAction'])->name('deletePost');

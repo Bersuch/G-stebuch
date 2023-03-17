@@ -11,7 +11,7 @@
     <h1>Edit Post {{ $user->id }}</h1>
     
     <hr/>
-    <form method="GET" action="{{ route('index', [], false) }}">
+    <form method="POST" action="{{ route('savePost', ['id' => $user->id]) }}">
         @csrf
         <div class="mb-3">
             <label for="inputUsername" class="form-label">Username</label>
