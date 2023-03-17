@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\http\Requests\GuestBookEntryRequest;
 use App\Models\GuestBookEntry;
 use Illuminate\Http\Request;
 
@@ -8,20 +9,9 @@ class IndexController {
 
     public function indexAction(Request $request) 
     {
-        if($request->getMethod() === 'POST') 
-        {
-            $validated = $request->validate([
-                'username' => 'required|max:255',
-                'email' => 'email|max:255|nullable',
-                'subtitle' => 'required|max:255',
-                'body' => 'required',
-            ]);
-            //dump($validated);
-            GuestBookEntry::create($validated);
-            return redirect()->route('index')->with('success', 'Erfolgreich gespeichert');
-        }
+       
 
-        $limit = 1;
+        $limit = max(env('LIMIT'),1);
         $maxEntries = GuestBookEntry::count();
         $maxPages = (int)ceil($maxEntries/$limit);
         $page = (int)$request->get('page',1);
@@ -37,4 +27,9 @@ class IndexController {
         return view('index', ['entries'=>$entries, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
     }
 
+    public function saveAction(GuestBookEntryRequest $request) {
+        $validated = $request->validated();
+        GuestBookEntry::create($validated);
+        return redirect()->route('index')->with('success', 'Erfolgreich gespeichert');
+    }
 }
