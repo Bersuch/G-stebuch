@@ -29,7 +29,6 @@ class IndexController {
 
     public function saveAction(GuestBookEntryRequest $request) {
         $validated = $request->validated();
-        //dump($validated);
         GuestBookEntry::create($validated);
         return redirect()->route('index')->with('success', 'Erfolgreich gespeichert');
     }
