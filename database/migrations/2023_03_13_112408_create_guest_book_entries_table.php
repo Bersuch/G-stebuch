@@ -13,8 +13,6 @@ return new class extends Migration
     {
         Schema::create('guest_book_entries', function (Blueprint $table) {
             $table->id();
-            $table->string('username', 255);
-            $table->string('email', 255)->nullable();
             $table->string('subtitle', 255);
             $table->text('body');
             $table->timestamps();
