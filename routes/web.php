@@ -1,8 +1,6 @@
 <?php
 
-use App\Controller\EditPostController;
-use App\Controller\IndexController;
-use App\Controller\DeletePostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'indexAction'])->name('index');
-Route::post('/', [IndexController::class, 'saveAction'])->name('saveEntry');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Edit
-Route::get('/editPost/{id}', [EditPostController::class, 'editPostAction'])->name('editPost');
-Route::post('/savePost/{$id}', [EditPostController::class, 'savePostAction'])->name('savePost');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-// Delete
-Route::get('deletePost/{id}', [DeletePostController::class, 'deletePostAction'])->name('deletePost');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
