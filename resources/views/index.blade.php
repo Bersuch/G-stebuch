@@ -12,8 +12,6 @@
     <hr/>
     @include('errors')
     @include('flash-message')
-
-    <p>Hallo Welt aus dem Index Blade</p>
     @include('form')
 
     @foreach ( $entries as $entry )

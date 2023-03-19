@@ -24,7 +24,7 @@ class IndexController {
         ->limit($limit)
         ->get();
         
-        return view('index', ['entries'=>$entries, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
+        return view('dashboard', ['entries'=>$entries, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
     }
 
     public function saveAction(GuestBookEntryRequest $request) {
