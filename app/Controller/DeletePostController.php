@@ -9,6 +9,6 @@ class DeletePostController
     public function deletePostAction($id) {
         
         DB::delete('delete from guest_book_entries where id = ?',[$id]);
-        return redirect()->route('index')->with('success', 'Eintrag Erfolgreich gelöscht');
+        return redirect()->route('dashboard')->with('success', 'Eintrag Erfolgreich gelöscht');
     }
 }

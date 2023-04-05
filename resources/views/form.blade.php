@@ -9,6 +9,8 @@
         <label for="inputBody" class="form-label">Body</label>
         <textarea  class="form-control @error('body') is-invalid @enderror" name="body" id="inputBody">{{ old('username') }}</textarea>
     </div>
+
+    <input type="hidden" value="{{ auth()->user()->id }}" name="user_id">
     
     <div class="mb-3">
         <button class="btn btn-primary">Speichern</button>

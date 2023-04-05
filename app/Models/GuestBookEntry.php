@@ -8,14 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class GuestBookEntry extends Model
 {
     use HasFactory;
-    protected string $username = '';
-    protected ?string $email = null;
     protected string $subtitle = '';
     protected string $body = '';
     protected $fillable = [
-        'username',
-        'email',
         'subtitle',
-        'body'
+        'body',
+        'user_id',
     ];
+
+    public function userEntry() {
+        return $this->belongsToMany(
+            User::class, 
+            UserEntries::class,
+            'id', //Foreign Key on UserEntry Table
+            'user_id' // Foreign Key on User Table
+        );
+    }
 }

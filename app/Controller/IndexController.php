@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\http\Requests\GuestBookEntryRequest;
+use App\http\Requests\StoreUserEntriesRequest;
 use App\Models\GuestBookEntry;
 use Illuminate\Http\Request;
 
@@ -27,9 +28,9 @@ class IndexController {
         return view('dashboard', ['entries'=>$entries, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
     }
 
-    public function saveAction(GuestBookEntryRequest $request) {
-        $validated = $request->validated();
+    public function saveAction(GuestBookEntryRequest $GuestBookRequest) {
+        $validated = $GuestBookRequest->validated();
         GuestBookEntry::create($validated);
-        return redirect()->route('index')->with('success', 'Erfolgreich gespeichert');
+        return redirect()->route('dashboard')->with('success', 'Erfolgreich gespeichert');
     }
 }
