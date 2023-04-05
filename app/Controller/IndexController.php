@@ -5,6 +5,7 @@ use App\http\Requests\GuestBookEntryRequest;
 use App\http\Requests\StoreUserEntriesRequest;
 use App\Models\GuestBookEntry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class IndexController {
 
@@ -24,8 +25,13 @@ class IndexController {
         ->offset($offset)
         ->limit($limit)
         ->get();
+
+        $entries_user = DB::table('guest_book_entries')
+        ->join('users', 'guest_book_entries.user_id', '=', 'users.id')
+        ->select('guest_book_entries.*', 'users.name')
+        ->get();
         
-        return view('dashboard', ['entries'=>$entries, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
+        return view('dashboard', ['entries'=>$entries, 'entries_user' => $entries_user, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
     }
 
     public function saveAction(GuestBookEntryRequest $GuestBookRequest) {

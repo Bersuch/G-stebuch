@@ -15,7 +15,9 @@
     @include('form')
 
     @foreach ( $entries as $entry )
-        @include('entry')
+        @foreach( $entries_user as $user)
+            @include('entry')
+        @endforeach
     @endforeach
         
     @include('pagination')
