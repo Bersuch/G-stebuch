@@ -1,7 +1,7 @@
 <form method="POST" action="{{ route('saveEntry', [], false) }}">
     @csrf
     <div class="mb-3">
-        <label for="inputSubtitle" class="form-label">Subtitle</label>
+        <label for="inputSubtitle" class="form-label">Titel</label>
         <input type="text" value="{{ old('subtitle') }}" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" id="inputSubtitle" >
     </div>
 

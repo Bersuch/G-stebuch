@@ -2,41 +2,36 @@
 
 
 
-@section('title', 'Gästebuch')
+@section('title', 'Post bearbeiten')
 
 @section('content')
 
-
-<div class="container">
-    <h1>Edit Post {{ $user->id }}</h1>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}" >
+@foreach ( $posts as $post )
+    <div class="container">
     
-    <hr/>
-    <form method="POST" action="{{ route('savePost', ['id' => $user->id]) }}">
-        @csrf
-        <div class="mb-3">
-            <label for="inputUsername" class="form-label">Username</label>
-            <input type="text" value="{{ $user->username }}" class="form-control @error('username') is-invalid @enderror" name="username" id="inputUsername" >
-        </div>
+        <h1>Post bearbeiten</h1>
+        <span>von: {{ $post->name }}, gepostet am: {{ Carbon\Carbon::parse($post->created_at)->format('d.m.Y') }}</span>
 
-        <div class="mb-3">
-            <label for="inputEmail" class="form-label">Email</label>
-            <input type="text" value="{{ $user->email }}" class="form-control @error('email') is-invalid @enderror" name="email" id="inputEmail" >
-        </div>
+    
 
-        <div class="mb-3">
-            <label for="inputSubtitle" class="form-label">Subtitel</label>
-            <input type="text" value="{{ $user->subtitle }}" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" id="inputSubtitle" >
-        </div>
+        <hr/>
+        <form method="POST" action="{{ route('savePost', ['id' => $post->id]) }}">
+            @csrf
+            <div class="mb-3">
+                <label for="inputSubtitle" class="form-label">Subtitel</label>
+                <input type="text" value="{{ $post->subtitle }}" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" id="inputSubtitle" >
+            </div>
 
-        <div class="mb-3">
-            <label for="inputBody" class="form-label">Body</label>
-            <textarea  class="form-control @error('body') is-invalid @enderror" name="body" id="inputBody">{{ $user->body }}</textarea>
-        </div>
+            <div class="mb-3">
+                <label for="inputBody" class="form-label">Body</label>
+                <textarea  class="form-control @error('body') is-invalid @enderror" name="body" id="inputBody">{{ $post->body }}</textarea>
+            </div>
         
-        <div class="mb-3">
-            <button class="btn btn-primary">Speichern</button>
-        </div>
-    </form>
-</div>
-
+            <div class="mb-3">
+                <button class="btn btn-primary">Speichern</button>
+            </div>
+        </form>
+    </div>
+@endforeach
 @endsection
