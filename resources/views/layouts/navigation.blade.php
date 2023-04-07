@@ -17,7 +17,7 @@
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link>
+                    <x-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                         {{ __('Profil') }}
                     </x-nav-link>
                 </div>
@@ -75,7 +75,7 @@
             <x-responsive-nav-link :href="route('gaestebuch')" :active="request()->routeIs('gaestebuch')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('profile')" :active="request()->routeIs('profile')">
                 {{ __('Profil') }}
             </x-responsive-nav-link>
         </div>
