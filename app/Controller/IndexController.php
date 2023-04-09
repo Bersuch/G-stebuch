@@ -30,11 +30,16 @@ class IndexController {
         $entries_user = DB::table('guest_book_entries')
         ->join('users', 'guest_book_entries.user_id', '=', 'users.id')
         ->select('guest_book_entries.*', 'users.name')
+        ->orderByDesc('guest_book_entries.id')
         ->paginate(2);
+
+        $user = DB::table('users')
+        ->select('id')
+        ->find(auth()->id());
         
         //dd($entries);
 
-        return view('dashboard', ['entries_user' => $entries_user, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
+        return view('dashboard', ['entries_user' => $entries_user, 'user' => $user]);    
     }
 
     public function saveAction(GuestBookEntryRequest $GuestBookRequest) {

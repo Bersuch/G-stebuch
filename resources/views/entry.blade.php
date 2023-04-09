@@ -1,9 +1,11 @@
 <div class="card mb-3">
     <div class="card-body">
+        
         <h5 class="card-title text-dark">{{ $entry->subtitle }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">von: <a href="{{ route('profile', ['id' => $entry->user_id]) }}">{{ $entry->name }}</a>, schrieb am: {{ Carbon\Carbon::parse($entry->created_at)->format('d.m.Y') }}</h6>
-        <p class="card-text text-body">{{ $entry->body }}</p>
+        <p class="card-text text-body">{{ $entry->user_id }}</p>
         <hr/>
+        @if($entry->user_id === $user->id)
         <a href="{{ route('editPost', ['id' => $entry->id]) }}">
             <button type="button" class="btn btn-warning">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -11,8 +13,7 @@
                     <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                 </svg> 
             Bearbeiten
-            </button>
-        </a>
+            </button></a>
         <a href="{{ route('deletePost', ['id' => $entry->id]) }}">
             <button type="button" class="btn btn-outline-danger">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
@@ -20,7 +21,8 @@
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                 </svg> 
                 Löschen
-            </button>
-        </a>
+            </button></a>
+        @else
+        @endif
     </div>
 </div>
