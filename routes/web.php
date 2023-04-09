@@ -33,14 +33,14 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//Route::get('/dashboard', [IndexController::class, 'indexAction'])->name('index');
+//Route::get('/dashboard', [IndexController::class, 'indexAction'])->name('dashboard');
 //Route::post('/dashboard', [IndexController::class, 'saveAction'])->name('saveEntry');
 
 
 // View
-Route::get('/gaestebuch', [IndexController::class, 'indexAction', ])->middleware(['auth', 'verified'])->name('gaestebuch');
+Route::get('/gaestebuch', [IndexController::class, 'indexAction', ])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/profile/{id}', [ProfilePage::class, 'profileAction', ])->middleware(['auth', 'verified'])->name('profile');
-Route::get('/profile', [ProfilePage::class, 'profileAction2', ])->middleware(['auth', 'verified'])->name('profile');
+Route::get('/profile', [ProfilePage::class, 'viewOwnProfile', ])->middleware(['auth', 'verified'])->name('OwnProfile');
 
 // Edit
 Route::get('/editPost/{id}', [EditPostController::class, 'editPostAction'])->middleware(['auth', 'verified'])->name('editPost');
