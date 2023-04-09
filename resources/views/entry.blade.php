@@ -1,7 +1,7 @@
 <div class="card mb-3">
     <div class="card-body">
         <h5 class="card-title text-dark">{{ $entry->subtitle }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">von: <a href="{{ route('profile', ['id' => $user->user_id]) }}">{{ $user->name }}</a>, schrieb am: {{ $entry->created_at->format('d.m.Y') }}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">von: <a href="{{ route('profile', ['id' => $entry->user_id]) }}">{{ $entry->name }}</a>, schrieb am: {{ Carbon\Carbon::parse($entry->created_at)->format('d.m.Y') }}</h6>
         <p class="card-text text-body">{{ $entry->body }}</p>
         <hr/>
         <a href="{{ route('editPost', ['id' => $entry->id]) }}">

@@ -8,12 +8,11 @@
     @include('errors')
     @include('flash-message')
     @include('form')
-    @foreach ( $entries as $entry )
-        @foreach( $entries_user as $user)
+    
+    @foreach ( $entries_user as $entry )
             @include('entry')
-        @endforeach
     @endforeach
-    @include('pagination')
+    {{ $entries_user }}
 </div>
 
 @endsection
