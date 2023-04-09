@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Controller\EditPostController;
 use App\Controller\IndexController;
 use App\Controller\DeletePostController;
+use App\Controller\ProfilePage;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,25 +22,32 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/gaestebuch', [IndexController::class, 'indexAction', ])->middleware(['auth', 'verified'])->name('gaestebuch');
-Route::post('/gaestebuch', [IndexController::class, 'saveAction'])->middleware(['auth', 'verified'])->name('saveEntry');
+
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile-settings', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile-settings', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile-settings', [ProfileController::class, 'destroy'])->name('profile.destroy');
     
 });
 
 
-//Route::get('/dashboard', [IndexController::class, 'indexAction'])->name('index');
+//Route::get('/dashboard', [IndexController::class, 'indexAction'])->name('dashboard');
 //Route::post('/dashboard', [IndexController::class, 'saveAction'])->name('saveEntry');
 
 
-// Edit
+// View
+Route::get('/gaestebuch', [IndexController::class, 'indexAction', ])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile/{id}', [ProfilePage::class, 'profileAction', ])->middleware(['auth', 'verified'])->name('profile');
+Route::get('/profile', [ProfilePage::class, 'viewOwnProfile', ])->middleware(['auth', 'verified'])->name('OwnProfile');
 
+// Edit
 Route::get('/editPost/{id}', [EditPostController::class, 'editPostAction'])->middleware(['auth', 'verified'])->name('editPost');
+
+// Save
 Route::post('/savePost{id}', [EditPostController::class, 'savePostAction'])->middleware(['auth', 'verified'])->name('savePost');
+Route::post('/gaestebuch', [IndexController::class, 'saveAction'])->middleware(['auth', 'verified'])->name('saveEntry');
 
 // Delete
 Route::get('deletePost/{id}', [DeletePostController::class, 'deletePostAction'])->name('deletePost');
