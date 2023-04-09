@@ -20,18 +20,26 @@ class IndexController {
         $page = min(max(1,$page), $maxPages);
         $offset = ($page-1) * $limit;
 
-        $entries = GuestBookEntry::query('')
+        /*$entries = GuestBookEntry::query('')
         ->orderBy('created_at', 'DESC')
         ->offset($offset)
         ->limit($limit)
-        ->get();
+        ->get();*/
+        //$entries_user = GuestBookEntry::paginate(2);
 
         $entries_user = DB::table('guest_book_entries')
         ->join('users', 'guest_book_entries.user_id', '=', 'users.id')
         ->select('guest_book_entries.*', 'users.name')
-        ->get();
+        ->orderByDesc('guest_book_entries.id')
+        ->paginate(2);
+
+        $user = DB::table('users')
+        ->select('id')
+        ->find(auth()->id());
         
-        return view('dashboard', ['entries'=>$entries, 'entries_user' => $entries_user, 'maxPages'=>$maxPages, 'currentPage'=>$page]);    
+        //dd($entries);
+
+        return view('dashboard', ['entries_user' => $entries_user, 'user' => $user]);    
     }
 
     public function saveAction(GuestBookEntryRequest $GuestBookRequest) {

@@ -10,7 +10,12 @@ class EditPostController
         $posts = DB::table('guest_book_entries')
         ->join('users', 'guest_book_entries.user_id', '=', 'users.id')
         ->select('guest_book_entries.*', 'users.name')
+        ->where('guest_book_entries.id', $id)
         ->get();
+
+        /*$posts = DB::table('guest_book_entries')
+        ->select('id')
+        ->find($id);*/
 
         return view('edit-post', ['posts' => $posts]);
     }
