@@ -22,6 +22,9 @@
         @foreach ($users as $user)
           <p class="text-left">Name: {{ $user->name }}</p>
           <p class="text-left">Email: {{ $user->email }}</p>
+          @if ($user->is_admin === 1)
+            <p class="text-left">Admin: YES</p>
+          @endif
         @endforeach
         
       </div>
