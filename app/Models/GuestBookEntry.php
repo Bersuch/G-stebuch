@@ -16,12 +16,20 @@ class GuestBookEntry extends Model
         'user_id',
     ];
 
-    public function userEntry() {
+    /*public function userEntry() {
         return $this->belongsToMany(
             User::class, 
             UserEntries::class,
             'id', //Foreign Key on UserEntry Table
             'user_id' // Foreign Key on User Table
         );
+    }*/
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    
+    public function comments() {
+        return $this->hasMany(Comment::class)->whereNull('parent_id');
     }
 }

@@ -14,6 +14,7 @@ class UserEntries extends Model
     protected BigInteger $entryId;
     protected $fillable = [
         'user_id',
-        'entry_id'
+        'entry_id',
+        'post_id'
     ];
 }

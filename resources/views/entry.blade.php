@@ -2,7 +2,9 @@
     <div class="card-body">
         <h5 class="card-title text-dark">{{ $entry->subtitle }}</h5>
         <h6 class="card-subtitle mb-2 text-muted">von: <a href="{{ route('profile', ['id' => $entry->user_id]) }}">{{ $entry->name }}</a>, schrieb am: {{ Carbon\Carbon::parse($entry->created_at)->format('d.m.Y m:h') }}</h6>
-        <p class="card-text text-body">{{ $entry->user_id }}</p>
+        <p class="card-text text-body">{{ $entry->body }}</p>
+        <hr/>
+        <a href="{{ route('showPost', ['id' => $entry->id]) }}" class="card-text text-body">Kommentare</a>
         <hr/>
         <!-- as OP you can only edit your own posts -->
         @if($entry->user_id === $user->id)

@@ -6,6 +6,7 @@ use App\Controller\EditPostController;
 use App\Controller\IndexController;
 use App\Controller\DeletePostController;
 use App\Controller\ProfilePage;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,7 @@ Route::middleware('auth')->group(function () {
 
 // View
 Route::get('/gaestebuch', [IndexController::class, 'indexAction', ])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/showPost/{id}', [IndexController::class, 'showPostAction', CommentController::class, 'showComments' ])->middleware(['auth', 'verified'])->name('showPost');
 Route::get('/profile/{id}', [ProfilePage::class, 'profileAction', ])->middleware(['auth', 'verified'])->name('profile');
 Route::get('/profile', [ProfilePage::class, 'viewOwnProfile', ])->middleware(['auth', 'verified'])->name('OwnProfile');
 
@@ -46,6 +48,7 @@ Route::get('/profile', [ProfilePage::class, 'viewOwnProfile', ])->middleware(['a
 Route::get('/editPost/{id}', [EditPostController::class, 'editPostAction'])->middleware(['auth', 'verified'])->name('editPost');
 
 // Save
+Route::post('/storeComment', [CommentController::class, 'storeComment'])->middleware(['auth', 'verified'])->name('storeComment');
 Route::post('/savePost{id}', [EditPostController::class, 'savePostAction'])->middleware(['auth', 'verified'])->name('savePost');
 Route::post('/gaestebuch', [IndexController::class, 'saveAction'])->middleware(['auth', 'verified'])->name('saveEntry');
 
@@ -53,3 +56,11 @@ Route::post('/gaestebuch', [IndexController::class, 'saveAction'])->middleware([
 Route::get('deletePost/{id}', [DeletePostController::class, 'deletePostAction'])->name('deletePost');
 
 require __DIR__.'/auth.php';
+
+
+/*
+@include('posts.commentsDisplay', [
+                            'comments' => $post->comments,
+                            'post_id' => $post->id,
+                        ])
+*/
