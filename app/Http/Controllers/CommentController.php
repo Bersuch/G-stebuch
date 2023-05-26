@@ -15,9 +15,13 @@ class CommentController extends Controller
         //dd($request['post_id']);
         $request->validate([
             'body'=>'required',
+            'post_id'=>'required'
         ]);
         $input = $request->all();
         $input['user_id'] = auth()->user()->id;
+        
+        //dd($request->all());
+
         Comment::create($input);
 
         $post = GuestBookEntry::whereId($request['post_id'])
@@ -25,6 +29,12 @@ class CommentController extends Controller
         ->first();
         return back()->with('post', $post);
 
+    }
+
+    public function deleteComment($id) {
+
+        DB::delete('delete from comments where id = ?',[$id]);
+        return redirect()->back()->with('success', 'Kommentar Erfolgreich gelöscht');
     }
 
     public function showComments($id) {

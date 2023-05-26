@@ -12,19 +12,16 @@
                         <p>
                             {{ $post->body }}
                         </p>
-                        <hr />
-                        <h4>Display Comments</h4>
                         @include('commentsDisplay', ['comments' => $post->comments, 'post_id' => $post->id])
                         <hr />
-                        <h4>Add comment</h4>
+                        <h4>Kommentar hinzufügen</h4>
                         <form method="post" action="{{ route('storeComment') }}">
                             @csrf
-                            
                             <div class="form-group" >
                                 <textarea class="form-control" name="body"></textarea>
-                                <input type="hidden" name="guest_book_entry_id" value="{{ $post->id }}" />
+                                <input type="hidden" name="guest_book_entry_id"  value="{{ $post->id }}" />
                             </div>
-                            <div class="form-group">
+                            <div class="form-group mt-2">
                                 <input type="submit" class="btn btn-success" value="Add Comment" />
                             </div>
                         </form>

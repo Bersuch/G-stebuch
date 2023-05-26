@@ -53,7 +53,9 @@ Route::post('/savePost{id}', [EditPostController::class, 'savePostAction'])->mid
 Route::post('/gaestebuch', [IndexController::class, 'saveAction'])->middleware(['auth', 'verified'])->name('saveEntry');
 
 // Delete
-Route::get('deletePost/{id}', [DeletePostController::class, 'deletePostAction'])->name('deletePost');
+Route::get('deletePost/{id}', [DeletePostController::class, 'deletePostAction'])->middleware(['auth', 'verified'])->name('deletePost');
+Route::get('/deleteComment{id}', [CommentController::class, 'deleteComment'])->middleware(['auth', 'verified'])->name('deleteComment');
+
 
 require __DIR__.'/auth.php';
 

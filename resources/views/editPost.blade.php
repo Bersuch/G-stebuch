@@ -19,17 +19,17 @@
         <form method="POST" action="{{ route('savePost', ['id' => $post->id]) }}">
             @csrf
             <div class="mb-3">
-                <label for="inputSubtitle" class="form-label">Subtitel</label>
+                <label for="inputSubtitle" class="form-label">Titel</label>
                 <input type="text" value="{{ $post->subtitle }}" class="form-control @error('subtitle') is-invalid @enderror" name="subtitle" id="inputSubtitle" >
             </div>
 
             <div class="mb-3">
-                <label for="inputBody" class="form-label">Body</label>
+                <label for="inputBody" class="form-label">Inhalt</label>
                 <textarea  class="form-control @error('body') is-invalid @enderror" name="body" id="inputBody">{{ $post->body }}</textarea>
             </div>
         
             <div class="mb-3">
-                <button class="btn btn-primary">Speichern</button>
+                <button class="btn btn-primary">Ändern</button>
             </div>
         </form>
     </div>
